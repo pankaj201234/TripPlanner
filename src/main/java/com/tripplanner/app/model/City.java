@@ -5,13 +5,15 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 
 @Table(name = "city")
 @Entity
-public class City {
-    @Id
+public class City extends Auditable{
+
     @Getter
     @Setter
     private Long cityCode;
@@ -21,7 +23,7 @@ public class City {
     private String name;
 
 
-
-    //@Getter @Setter
-    //private List<TopAttractions> spots;
+    @OneToMany(mappedBy = "city")
+    @Getter @Setter
+    private List<TopAttractions> spots;
 }

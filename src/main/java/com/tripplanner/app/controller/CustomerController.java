@@ -9,27 +9,24 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
-public class UserController {
+@RequestMapping("/user")
+public class CustomerController {
+
     @Autowired
     private CityRepository cityRepository;
 
     @GetMapping("/cities")
-    public void getAllCities() {
-//        return cityRepository.findAll();
+    public List<City> getAllCities() {
+        return cityRepository.findAll();
     }
 
-    @GetMapping("/TopAttractions")
-    public void getAllTopAttraction() {
+    /*@GetMapping("/user/TopAttractions")
+    public void getAllTopAttraction(City city) {
+//        return city.getSpots();
+    }*/
 
-    }
-
-    @PostMapping("/cities")
+    @PostMapping("/AddCity")
     public City addCity(@Valid @RequestBody City city) {
         return cityRepository.save(city);
-    }
-    public void deleteCity(){
-    }
-    public void updateCity(){
     }
 }

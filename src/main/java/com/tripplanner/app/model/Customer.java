@@ -10,13 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "user")
-public class User extends Auditable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
-    private Long uid;
+public class Customer extends Auditable {
 
     @Getter
     @Setter
@@ -31,4 +25,7 @@ public class User extends Auditable {
 
     @Getter @Setter @URL
     private String picURL;
+
+    @Getter @Setter
+    private String password;
 }
