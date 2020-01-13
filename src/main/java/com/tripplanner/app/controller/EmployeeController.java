@@ -1,8 +1,10 @@
 package com.tripplanner.app.controller;
 
 import com.tripplanner.app.model.City;
+import com.tripplanner.app.model.TopAttractions;
 import com.tripplanner.app.repository.CityRepository;
 import com.tripplanner.app.repository.EmployeeRepository;
+import com.tripplanner.app.repository.TopAttractionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +16,10 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
+    @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private TopAttractionsRepository topAttractionsRepository;
 
     @GetMapping("/cities")
     public List<City> getAllCities() {
@@ -22,22 +27,28 @@ public class EmployeeController {
     }
 
     @GetMapping("/TopAttractions")
-    public void getAllTopAttraction(City city) {
-        Long cc = city.getCityCode();
-
+    public List<TopAttractions> getAllTopAttraction(City city) {
+        return city.getSpots();
     }
 
     @PostMapping("/AddCity")
-    public City addCity(@Valid @RequestBody City city) {
-        return cityRepository.save(city);
+    public void addCity(@Valid @RequestBody City city) {
+        cityRepository.save(city);
     }
 
+    @PostMapping("/AddTopAttraction")
+    public void addCity(@Valid @RequestBody TopAttractions topAttraction) {
+        //City city=topAttraction.getCity();
+        topAttractionsRepository.save(topAttraction);
+    }
+
+    @PostMapping("/DeleteCity")
     public void deleteCity(@Valid @RequestBody City city) {
-        cityRepository.deleteById(city.getId());
+        //cityRepository.deleteById(city.getId());
+        cityRepository.delete(city);
     }
 
     /*@PostMapping("/UpdateCityAttractions")
     public void updateCityAttractions(@Valid @RequestBody City city) {
-
     }*/
 }

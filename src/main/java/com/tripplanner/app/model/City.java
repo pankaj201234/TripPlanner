@@ -1,5 +1,6 @@
 package com.tripplanner.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,18 +11,15 @@ import javax.persistence.Table;
 import java.util.List;
 
 
-@Table(name = "city")
 @Entity
+@Table(name = "city")
+@JsonIgnoreProperties(value={"spots"}, allowGetters= true)
 public class City extends Auditable{
-
-    @Getter
-    @Setter
-    private Long cityCode;
-
-    @Getter
-    @Setter
+    @Getter @Setter
     private String name;
 
+    @Getter @Setter
+    private Long cityCode;
 
     @OneToMany(mappedBy = "city")
     @Getter @Setter
