@@ -4,18 +4,12 @@ import com.tripplanner.app.model.City;
 import com.tripplanner.app.model.TopAttractions;
 import com.tripplanner.app.repository.CityRepository;
 import com.tripplanner.app.repository.TopAttractionsRepository;
-import lombok.Getter;
-//import org.apache.tomcat.util.json.JSONParser;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import javax.validation.Valid;
 import java.util.List;
 import java.lang.String;
-import org.json.simple.parser.JSONParser;
 
 @RestController
 @RequestMapping("/user")
@@ -66,8 +60,9 @@ public class CustomerController {
     }
 
     @GetMapping("/PlanIt")
-    public List<TopAttractions> getShortestPath(List<TopAttractions> topAttractionsList) {
+    public List<TopAttractions> getShortestPath(@RequestBody List<TopAttractions> topAttractionsList) throws NullPointerException{
         TSP tsp = new TSP();
+        List<TopAttractions> ans = null;
         Double[][] cityGraph=null;
         for(TopAttractions topAttractions1: topAttractionsList) {
             for(TopAttractions topAttractions2: topAttractionsList) {
@@ -80,7 +75,8 @@ public class CustomerController {
                 cityGraph[Math.toIntExact(topAttractions1.getId())][Math.toIntExact(topAttractions2.getId())]=crowFlyDistance;
             }
         }
-        return tsp.TSPUtil(cityGraph, topAttractionsList.size());
+        ans = TSP.TSPUtil(cityGraph, topAttractionsList.size());
+        return ans;
     }
 
     private Double getCrowFlyDistance(Double lat1, Double lat2, Double lon1, Double lon2) {

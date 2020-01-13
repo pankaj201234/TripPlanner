@@ -21,8 +21,8 @@ public class TopAttractions extends Auditable{
     @ManyToOne
     private City city;
 
-    @Getter @Setter
-    private String typeOfAttraction;
+ //   @Getter @Setter
+ //   private String typeOfAttraction;
 
     @Getter @Setter
     private String name;
@@ -30,15 +30,6 @@ public class TopAttractions extends Auditable{
     @Getter @Setter
     private int timeToCover;
 
-    @Getter @Setter
-    private Double latitude;
-
-    @Getter @Setter
-    private Double longitude;
-
-    //@Getter @Setter @ElementCollection
-    //private Map<TopAttractions, Long> distanceToOtherAttractions;
-
-    @Getter @Setter @URL
-    private String picURL;
+ //   @Getter @Setter @URL
+ //   private String picURL;
 }
