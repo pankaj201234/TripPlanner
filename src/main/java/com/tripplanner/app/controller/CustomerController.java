@@ -63,15 +63,15 @@ public class CustomerController {
     public List<TopAttractions> getShortestPath(@RequestBody List<TopAttractions> topAttractionsList) throws NullPointerException{
         TSP tsp = new TSP();
         List<TopAttractions> ans = null;
-        Double[][] cityGraph=null;
+        Double[][] cityGraph=new Double[10][10];
         for(TopAttractions topAttractions1: topAttractionsList) {
             for(TopAttractions topAttractions2: topAttractionsList) {
                 Double latitude1 = getLatitude(topAttractions1.getName(), topAttractions1.getCity().getName());
                 Double longitude1 = getLongitude(topAttractions1.getName(), topAttractions1.getCity().getName());
                 Double latitude2 = getLatitude(topAttractions2.getName(), topAttractions2.getCity().getName());
                 Double longitude2 = getLongitude(topAttractions2.getName(), topAttractions2.getCity().getName());
-
                 Double crowFlyDistance=getCrowFlyDistance(latitude1, latitude2, longitude1, longitude2);
+               // System.out.println(topAttractions1.get);
                 cityGraph[Math.toIntExact(topAttractions1.getId())][Math.toIntExact(topAttractions2.getId())]=crowFlyDistance;
             }
         }

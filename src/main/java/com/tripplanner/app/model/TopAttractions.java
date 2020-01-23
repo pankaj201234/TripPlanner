@@ -5,12 +5,10 @@ import com.tripplanner.app.model.Auditable;
 import com.tripplanner.app.model.City;
 import lombok.Getter;
 import lombok.Setter;
+
 import org.hibernate.validator.constraints.URL;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Map;
 
 @Entity
@@ -18,7 +16,7 @@ import java.util.Map;
 @JsonIgnoreProperties(value={"picURL"}, allowGetters= true)
 public class TopAttractions extends Auditable{
     @Getter @Setter
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private City city;
 
  //   @Getter @Setter
